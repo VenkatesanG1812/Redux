@@ -33,6 +33,7 @@ export const Product = () => {
 
   return (
     <div className="product">
+      <h2>Shopping Card Application</h2>
       {inial.map((product) => (
         <div key={product.id} className="card">
           <img src={product.image} alt={product.title} />
