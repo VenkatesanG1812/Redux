@@ -18,7 +18,7 @@ export const Navbar = () => {
         alignItems: "center",
       }}
     >
-      <span>Redux S</span>
+      <span>Redux Store</span>
       <Link className="navLink" to="/">
         Home
       </Link>

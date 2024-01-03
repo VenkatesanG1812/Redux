@@ -9,9 +9,9 @@ const Cart = () => {
   }
   if (cart.length == 0) return <h2>Cart is empty</h2>;
   return (
-    <div>
+    <div className="product">
       {cart.map((product) => (
-        <div key={product.id} className="card">
+        <div key={product.id} className="cartCard">
           <img src={product.image} alt={product.title} />
           <h3>{product.title}</h3>
 

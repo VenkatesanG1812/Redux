@@ -11,7 +11,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={< />}></Route>
+          <Route path="/" element={<Home />}></Route>
           <Route path="/cart" element={<Cart />}></Route>
         </Routes>
       </BrowserRouter>

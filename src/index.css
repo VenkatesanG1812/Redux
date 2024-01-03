@@ -93,13 +93,18 @@ img {
 }
 
 .cartCard {
-  display: flex;
+ display: flex;
+flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   background: #fff;
-  margin-bottom: 20px;
-  padding: 14px;
+
+  /* padding: 14px; */
   border-radius: 5px;
+  border: 50px;
+  margin: 25px;
+  width: 200px;
+  height: 300px;
 }
 .product{
   border: 10px;
