@@ -8,7 +8,7 @@ export const Home = () => {
       <h2>This Home Page</h2>
       <Search />
       {/* <Product /> */}
-      <ProductThunk />
+      {/* <ProductThunk /> */}
     </div>
   );
 };

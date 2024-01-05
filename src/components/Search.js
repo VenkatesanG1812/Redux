@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { ProductThunk } from "./ProdThunk";
 export const Search = () => {
   console.log("component");
   function Sea(event) {
@@ -22,6 +22,7 @@ export const Search = () => {
         />
         <h2>Search value {searval}</h2>
       </div>
+      <ProductThunk prod={searval} />
     </div>
   );
 };

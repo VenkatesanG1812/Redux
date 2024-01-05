@@ -26,7 +26,7 @@ export const Navbar = () => {
         Cart
       </Link>
       <div>Cart Count is {cart.length}</div>
-      <div>Factorial {com}</div>
+      <div>Factorials {com}</div>
     </div>
   );
 };
