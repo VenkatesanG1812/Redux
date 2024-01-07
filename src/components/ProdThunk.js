@@ -31,7 +31,10 @@ export const ProductThunk = () => {
   };
   if (S === status.Load) return <div>Loading...</div>;
   if (S === status.fail) return <div>Failed to load</div>;
-
+  function valsearch() {
+    if (search.length > 0) return false;
+    else return true;
+  }
   return (
     <div>
       <label for="search">Search Product</label>
@@ -39,9 +42,17 @@ export const ProductThunk = () => {
         placeholder="search"
         id="search"
         value={search}
-        onChange={(event) => setsearch(event.target.value)}
+        onChange={(event) => {
+          setsearch(event.target.value);
+          if (search === "") {
+            console.log("inside log");
+            // setsearchres([]);
+          }
+        }}
       ></input>
-      <button onClick={() => handleSearch()}>Search</button>
+      <button disabled={valsearch()} onClick={() => handleSearch()}>
+        Search
+      </button>
       <div className="product">
         {searchresult.length > 0 ? (
           searchresult.map((product) => (
@@ -52,7 +63,7 @@ export const ProductThunk = () => {
             </div>
           ))
         ) : (
-          <div>
+          <div className="product">
             {prod.map((product) => (
               <div key={product.id} className="card">
                 <img src={product.image} alt={product.title} />
