@@ -36,7 +36,7 @@ img {
   height: 320px;
   display: flex;
   flex-direction: column;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-evenly;
   border-radius: 30px;
   flex-wrap: initial;
@@ -135,7 +135,7 @@ flex-direction: column;
 {
   display: flex;
   justify-content:space-around ;
-  align-items: center;
+  align-items: baseline;
   background-color: #03a9f447;
   color: #0b22a5;
 }
