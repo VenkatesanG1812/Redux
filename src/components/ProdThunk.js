@@ -60,6 +60,11 @@ export const ProductThunk = () => {
       </>
     );
   }
+  let rupee = new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+  });
+
   return (
     <div>
       <label for="search">Search Product</label>
@@ -80,16 +85,16 @@ export const ProductThunk = () => {
             <div key={product.id} className="card">
               <img src={product.image} alt={product.title} />
               <h3>{product.title}</h3>
-              <h4>Rs{product.price * 100}</h4>
+              <h4>{rupee.format(product.price * 100)}</h4>
             </div>
           ))
         ) : (
           <div className="product">
-            {prod.map((product) => (
-              <div key={product.id} className="card">
+            {prod.map((product, index) => (
+              <div key={index} className="card">
                 <img src={product.image} alt={product.title} />
                 <h3>{product.title}</h3>
-                <h4>Rs{product.price * 100}</h4>
+                <h4>{rupee.format(product.price * 50)}</h4>
                 <button className="btn" onClick={() => addtocart(product)}>
                   Add to card
                 </button>
