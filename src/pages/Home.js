@@ -5,8 +5,8 @@ import { ProductThunk } from "..//components/ProdThunk";
 export const Home = () => {
   return (
     <div>
-      <h2>This Home Page</h2>
-      <Search />
+      <h2>Products in Offer</h2>
+      {/* <Search /> */}
       <ProductThunk />
     </div>
   );

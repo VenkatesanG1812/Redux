@@ -4,29 +4,23 @@ import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   const cart = useSelector((state) => state.createSlice);
-  const com = useMemo(() => complexfun(cart.length), [cart.length]);
+  // const com = useMemo(() => complexfun(cart.length), [cart.length]);
   function complexfun(len) {
     if (len <= 1) return 1;
     return complexfun(len - 1) * len;
   }
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-      }}
-    >
-      <span>Redux Store</span>
-      <Link className="navLink" to="/">
+    <div className="navhome">
+      <h2>Shopping Zone</h2>
+      <Link style={{ fontWeight: "bold", fontSize: "x-large" }} to="/">
         Home
       </Link>
-      <Link className="navLink" to="/cart">
+      <Link style={{ fontWeight: "bold", fontSize: "x-large" }} to="/cart">
         Cart
       </Link>
-      <div>Cart Count is {cart.length}</div>
-      <div>Factorials {com}</div>
+      <div style={{ fontWeight: "bold" }}>Cart-Items: {cart.length}</div>
+      {/* <div>Factorials {com}</div> */}
     </div>
   );
 };
