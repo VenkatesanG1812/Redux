@@ -12,7 +12,7 @@ export const Navbar = () => {
 
   return (
     <div className="navhome">
-      <h2>Shopping Zone</h2>
+      <h2>Offer Zone</h2>
       <Link style={{ fontWeight: "bold", fontSize: "x-large" }} to="/">
         Home
       </Link>
