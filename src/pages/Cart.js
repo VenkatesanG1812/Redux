@@ -15,7 +15,7 @@ const Cart = () => {
   return (
     <div className="product">
       {cart.map((product) => (
-        <div key={product.id} className="cartCard">
+        <div key={product.id} className="card">
           <img src={product.image} alt={product.title} />
           <h3>{product.title}</h3>
           <h3>{rupee.format(product.price * 100)}</h3>
