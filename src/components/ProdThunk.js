@@ -69,7 +69,7 @@ export const ProductThunk = () => {
     <div>
       <label for="search">Search Product</label>
       <input
-        placeholder="search"
+        placeholder="searchproduct"
         id="search"
         value={search}
         onChange={(event) => {
