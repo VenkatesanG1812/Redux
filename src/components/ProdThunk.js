@@ -76,9 +76,9 @@ export const ProductThunk = () => {
           setsearch(event.target.value);
         }}
       ></input>
-      <button disabled={valsearch()} onClick={() => handleSearch()}>
+      {/* <button disabled={valsearch()} onClick={() => handleSearch()}>
         Search
-      </button>
+      </button> */}
       <div className="product">
         {searchresult.length > 0 ? (
           searchresult.map((product) => (
