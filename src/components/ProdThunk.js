@@ -6,11 +6,10 @@ import { add } from "../slices/cart";
 import { status } from "..//slices/myproduct";
 
 export const ProductThunk = () => {
-  const [search, setsearch] = useState("");
-  const [searchresult, setsearchres] = useState([]);
-
   const dispatch = useDispatch();
   let { data: prod, status: S } = useSelector((state) => state.myproduct);
+  const [search, setsearch] = useState("");
+  const [searchresult, setsearchres] = useState(prod);
 
   const addtocart = (product) => {
     dispatch(add(product));
@@ -21,45 +20,48 @@ export const ProductThunk = () => {
   const getdata = async () => {
     dispatch(fetchdata());
   };
-
+  useEffect(() => {
+    handleSearch();
+  }, [searchresult, search]);
   const handleSearch = () => {
-    // console.log(search);
+    console.log("first");
+    if (search == "") {
+      console.log("inside");
+      console.log("prod=>", prod);
+      setsearchres(prod);
+    } else {
+      let filterres = prod.filter((item) =>
+        item.title.toLowerCase().includes(search.toLowerCase())
+      );
 
-    let filterres = prod.filter((item) =>
-      item.title.toLowerCase().includes(search.toLowerCase())
-    );
-    if (filterres.length == 0) {
-      setsearchres([-1]);
-
-      return;
+      setsearchres(filterres);
     }
-    setsearchres(filterres);
   };
   // console.log(searchresult);
   if (S === status.Load) return <div>Loading...</div>;
   if (S === status.fail) return <div>Failed to load</div>;
-  function valsearch() {
-    if (search.length > 0) return false;
-    else return true;
-  }
-  if (search == "") {
-    searchresult.length = 0;
-  }
-  if (searchresult[0] == -1) {
-    return (
-      <>
-        <div>Search Item not found</div>
-        <button
-          onClick={() => {
-            setsearchres([]);
-            setsearch("");
-          }}
-        >
-          Click Me for display all products
-        </button>
-      </>
-    );
-  }
+  // function valsearch() {
+  //   if (search.length > 0) return false;
+  //   else return true;
+  // }
+  // if (search == "") {
+  //   searchresult.length = 0;
+  // }
+  // if (searchresult[0] == -1) {
+  //   return (
+  //     <>
+  //       <div>Search Item not found</div>
+  //       <button
+  //         onClick={() => {
+  //           setsearchres([]);
+  //           setsearch("");
+  //         }}
+  //       >
+  //         Click Me for display all products
+  //       </button>
+  //     </>
+  //   );
+  // }
   let rupee = new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
@@ -80,15 +82,14 @@ export const ProductThunk = () => {
         Search
       </button> */}
       <div className="product">
-        {searchresult.length > 0 ? (
-          searchresult.map((product) => (
-            <div key={product.id} className="card">
-              <img src={product.image} alt={product.title} />
-              <h3>{product.title}</h3>
-              <h4>{rupee.format(product.price * 100)}</h4>
-            </div>
-          ))
-        ) : (
+        {searchresult.map((product) => (
+          <div key={product.id} className="card">
+            <img src={product.image} alt={product.title} />
+            <h3>{product.title}</h3>
+            <h4>{rupee.format(product.price * 100)}</h4>
+          </div>
+        ))}
+        {/* ) : (
           <div className="product">
             {prod.map((product, index) => (
               <div key={index} className="card">
@@ -101,7 +102,7 @@ export const ProductThunk = () => {
               </div>
             ))}
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
