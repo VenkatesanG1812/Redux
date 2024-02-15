@@ -18,18 +18,20 @@ export const ProductThunk = () => {
     getdata();
   }, []);
   const getdata = async () => {
+    console.log("getdata-useeffect=");
     dispatch(fetchdata());
   };
   useEffect(() => {
     handleSearch();
-  }, [searchresult, search]);
+  }, [search]);
   const handleSearch = () => {
     console.log("first");
-    if (search == "") {
+    if (search === "") {
       console.log("inside");
       console.log("prod=>", prod);
-      setsearchres(prod);
+      // setsearchres(prod);
     } else {
+      console.log("else");
       let filterres = prod.filter((item) =>
         item.title.toLowerCase().includes(search.toLowerCase())
       );
@@ -37,7 +39,8 @@ export const ProductThunk = () => {
       setsearchres(filterres);
     }
   };
-  // console.log(searchresult);
+
+  console.log(searchresult);
   if (S === status.Load) return <div>Loading...</div>;
   if (S === status.fail) return <div>Failed to load</div>;
   // function valsearch() {
@@ -69,7 +72,7 @@ export const ProductThunk = () => {
 
   return (
     <div>
-      <label for="search">Search Product</label>
+      <label for="search">Search Products</label>
       <input
         placeholder="searchproduct"
         id="search"
