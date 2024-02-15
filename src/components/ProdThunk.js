@@ -22,14 +22,20 @@ export const ProductThunk = () => {
     dispatch(fetchdata());
   };
   useEffect(() => {
+    // const timer = setTimeout(() => {
+    //   handleSearch();
+    // }, 5000);
+    // return () => {
+    //   clearTimeout(timer);
+    // };
     handleSearch();
-  }, [search]);
+  }, [prod, search]);
   const handleSearch = () => {
     console.log("first");
     if (search === "") {
       console.log("inside");
       console.log("prod=>", prod);
-      // setsearchres(prod);
+      setsearchres(prod);
     } else {
       console.log("else");
       let filterres = prod.filter((item) =>
@@ -89,6 +95,7 @@ export const ProductThunk = () => {
           <div key={product.id} className="card">
             <img src={product.image} alt={product.title} />
             <h3>{product.title}</h3>
+            <h3>Rating:{product.rating.rate}</h3>
             <h4>{rupee.format(product.price * 100)}</h4>
           </div>
         ))}
