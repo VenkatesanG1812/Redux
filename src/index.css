@@ -30,17 +30,21 @@ img {
   background:#8dbdbf7a;
   padding: 20px;
   text-align: center;
-  border: 50px;
+  /* border: 50px; */
   margin: 25px;
   width: 200px;
-  height: 320px;
+  /* height: 380px; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   border-radius: 30px;
   flex-wrap: initial;
   color: currentColor;
+}
+.card:hover{
+  background: rgb(72, 194, 219);
+border: 2px solid rgba(10, 4, 43, 0.147);
 }
 .productsWrapper {
   display: grid;

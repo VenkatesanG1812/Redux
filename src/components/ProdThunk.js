@@ -90,13 +90,20 @@ export const ProductThunk = () => {
       {/* <button disabled={valsearch()} onClick={() => handleSearch()}>
         Search
       </button> */}
-      <div className="product">
+      <div className="product" onClick={console.log("old")}>
         {searchresult.map((product) => (
-          <div key={product.id} className="card">
+          <div
+            key={product.id}
+            className="card"
+            onClick={() => console.log("heelo")}
+          >
             <img src={product.image} alt={product.title} />
             <h3>{product.title}</h3>
             <h3>Rating:{product.rating.rate}</h3>
             <h4>{rupee.format(product.price * 100)}</h4>
+            <button className="btn" onClick={() => addtocart(product)}>
+              Add to card
+            </button>
           </div>
         ))}
         {/* ) : (
