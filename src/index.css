@@ -26,6 +26,14 @@ body {
 img {
   height: 80px;
 }
+.product .rating
+{
+  background-color: #3de65e;
+  padding: 5px 3px;
+  border-radius: 8px;
+  width: 50px;
+  margin: 5px; 
+}
 .card {
   background:#8dbdbf7a;
   padding: 20px;
@@ -43,8 +51,10 @@ img {
   color: currentColor;
 }
 .card:hover{
-  background: rgb(72, 194, 219);
-border: 2px solid rgba(10, 4, 43, 0.147);
+  /* background: rgb(72, 194, 219); */
+/* border: 2px solid rgba(10, 4, 43, 0.147); */
+color:rgb(47, 47, 208);
+cursor:auto;
 }
 .productsWrapper {
   display: grid;
@@ -91,6 +101,15 @@ border: 2px solid rgba(10, 4, 43, 0.147);
   font-weight: bold;
   text-transform: uppercase;
   margin-left: 40px;
+}
+.rating .starimage
+{
+  display: inline-block;
+  /* width: 100px; */
+  border-image-width: 10px;
+  border-radius: 10px;
+  size: 100px;
+  color: antiquewhite;
 }
 .navLink {
   background-color: black;

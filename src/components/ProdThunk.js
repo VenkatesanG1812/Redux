@@ -76,6 +76,8 @@ export const ProductThunk = () => {
     currency: "INR",
   });
 
+  const handlehover = () => {};
+
   return (
     <div>
       <label for="search">Search Products</label>
@@ -90,17 +92,22 @@ export const ProductThunk = () => {
       {/* <button disabled={valsearch()} onClick={() => handleSearch()}>
         Search
       </button> */}
-      <div className="product" onClick={console.log("old")}>
+      <div className="product">
         {searchresult.map((product) => (
           <div
             key={product.id}
             className="card"
-            onClick={() => console.log("heelo")}
+            onMouseEnter={() => handlehover()}
           >
             <img src={product.image} alt={product.title} />
             <h3>{product.title}</h3>
-            <h3>Rating:{product.rating.rate}</h3>
             <h4>{rupee.format(product.price * 100)}</h4>
+            <div class="rating">
+              <span>{product.rating.rate}</span>
+              <span class="starimage">★</span>
+              {/* <span class="starimage">✰</span> */}
+            </div>
+
             <button className="btn" onClick={() => addtocart(product)}>
               Add to card
             </button>
