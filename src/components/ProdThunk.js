@@ -6,11 +6,11 @@ import { add } from "../slices/cart";
 import { status } from "..//slices/myproduct";
 
 export const ProductThunk = () => {
-  const [search, setsearch] = useState("");
-  const [searchresult, setsearchres] = useState([]);
-
   const dispatch = useDispatch();
   let { data: prod, status: S } = useSelector((state) => state.myproduct);
+  const [search, setsearch] = useState("");
+  const [searchresult, setsearchres] = useState(prod);
+  const [starfilter, setstarfilter] = useState("all");
 
   const addtocart = (product) => {
     dispatch(add(product));
@@ -19,90 +19,116 @@ export const ProductThunk = () => {
     getdata();
   }, []);
   const getdata = async () => {
+    console.log("getdata-useeffect=");
     dispatch(fetchdata());
   };
-
+  useEffect(() => {
+    handleSearch();
+  }, [prod, search, starfilter]);
   const handleSearch = () => {
-    // console.log(search);
-
-    let filterres = prod.filter((item) =>
-      item.title.toLowerCase().includes(search.toLowerCase())
-    );
-    if (filterres.length == 0) {
-      setsearchres([-1]);
-
-      return;
+    console.log("first");
+    if (search === "") {
+      if (starfilter == "all") {
+        console.log("understarfilter1");
+        setsearchres(prod);
+      } else {
+        console.log("understarfilter2");
+        let filterstart = prod.filter((item) => item.rating.rate >= starfilter);
+        setsearchres(filterstart);
+      }
+    } else {
+      let filterres = prod.filter((item) =>
+        item.title.toLowerCase().includes(search.toLowerCase())
+      );
+      if (starfilter == "all") {
+        console.log("understarfilter1");
+        setsearchres(filterres);
+      } else {
+        console.log("understarfilter2new");
+        let filterstart = filterres.filter(
+          (item) => item.rating.rate >= starfilter
+        );
+        setsearchres(filterstart);
+      }
     }
-    setsearchres(filterres);
   };
-  // console.log(searchresult);
+
+  //   console.log(searchresult);
   if (S === status.Load) return <div>Loading...</div>;
   if (S === status.fail) return <div>Failed to load</div>;
-  function valsearch() {
-    if (search.length > 0) return false;
-    else return true;
-  }
-  if (search == "") {
-    searchresult.length = 0;
-  }
-  if (searchresult[0] == -1) {
-    return (
-      <>
-        <div>Search Item not found</div>
-        <button
-          onClick={() => {
-            setsearchres([]);
-            setsearch("");
-          }}
-        >
-          Click Me for display all products
-        </button>
-      </>
-    );
-  }
+
   let rupee = new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
   });
+  function handlestarfiler(event) {
+    setstarfilter(event.target.value);
+  }
+
+  //   const handlehover = () => {};
 
   return (
     <div>
-      <label for="search">Search Product</label>
-      <input
-        placeholder="searchproduct"
-        id="search"
-        value={search}
-        onChange={(event) => {
-          setsearch(event.target.value);
-        }}
-      ></input>
-      <button disabled={valsearch()} onClick={() => handleSearch()}>
+      <div className="filter">
+        <div>
+          <label htmlFor="search">Search Products</label>
+          <input
+            placeholder="searchproduct"
+            id="search"
+            value={search}
+            onChange={(event) => {
+              setsearch(event.target.value);
+            }}
+          ></input>
+        </div>
+
+        {/* <button disabled={valsearch()} onClick={() => handleSearch()}>
         Search
-      </button>
-      <div className="product">
-        {searchresult.length > 0 ? (
-          searchresult.map((product) => (
-            <div key={product.id} className="card">
-              <img src={product.image} alt={product.title} />
-              <h3>{product.title}</h3>
-              <h4>{rupee.format(product.price * 100)}</h4>
-            </div>
-          ))
-        ) : (
-          <div className="product">
-            {prod.map((product, index) => (
-              <div key={index} className="card">
-                <img src={product.image} alt={product.title} />
-                <h3>{product.title}</h3>
-                <h4>{rupee.format(product.price * 50)}</h4>
-                <button className="btn" onClick={() => addtocart(product)}>
-                  Add to card
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
+      </button> */}
+        <div>
+          <label>filter</label>
+          <select onChange={(event) => handlestarfiler(event)}>
+            <option value="all">all</option>
+            <option value="3">3★+</option>
+            <option value="4">4★+</option>
+          </select>
+        </div>
       </div>
+      <div className="product">
+        {searchresult.map((product) => (
+          <div
+            key={product.id}
+            className="card"
+            // onMouseEnter={() => handlehover()}
+          >
+            <img src={product.image} alt={product.title} />
+            <h3>{product.title}</h3>
+            <h4>{rupee.format(product.price * 100)}</h4>
+            <div className="rating">
+              <span>{product.rating.rate}</span>
+              <span classNames="starimage">★</span>
+            </div>
+
+            <button className="btn" onClick={() => addtocart(product)}>
+              Add to card
+            </button>
+          </div>
+        ))}
+      </div>
+      {/* ) : (
+  <div className="product">
+    {prod.map((product, index) => (
+      <div key={index} className="card">
+        <img src={product.image} alt={product.title} />
+        <h3>{product.title}</h3>
+        <h4>{rupee.format(product.price * 50)}</h4>
+        <button className="btn" onClick={() => addtocart(product)}>
+          Add to card
+        </button>
+      </div>
+    ))}
+  </div>
+)} */}
     </div>
   );
 };

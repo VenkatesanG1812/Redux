@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { configureStore } from "@reduxjs/toolkit";
 import axios from "axios";
 import { PRODUCTS_URL } from "../constant";
 export const status = {
@@ -32,7 +32,7 @@ export function fetchdata() {
     dispatch(setload(status.Load));
     try {
       const res = await axios.get(PRODUCTS_URL);
-      console.log(res);
+      console.log("resthunk", res);
       dispatch(setproduct(res.data));
       dispatch(setload(status.success));
     } catch (err) {
