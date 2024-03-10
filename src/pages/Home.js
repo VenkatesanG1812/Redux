@@ -5,7 +5,10 @@ import { ProductThunk } from "..//components/ProdThunk";
 export const Home = () => {
   return (
     <div>
-      <h2 style={{ color: "#25757f" }}>Products in Offer</h2>
+      x
+      <h2 style={{ color: "#25757f", textAlign: "center" }}>
+        Products in Offer
+      </h2>
       {/* <Search /> */}
       <ProductThunk />
     </div>
